@@ -77,21 +77,6 @@ public:
 			invalidStr = "";
 		}
 
-		cout << "Enumerating Tokens..." << endl;
-
-		for (Token token : tokens) {
-			if (token.type == Token::STRING_UNKNOWN) {
-				cout << "Unknown String" << endl;
-			}
-			if (token.type == Token::STRING_LITTERAL) {
-				cout << "Litteral (" << token.raw << ")" << endl;
-			}
-			else {
-				cout << token.type << endl;
-			}
-		}
-
-		cout << "Enumerated " << tokens.size() << " tokens!" << endl;
 	}
 
 private:
