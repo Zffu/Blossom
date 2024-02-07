@@ -137,6 +137,7 @@
     <ClInclude Include="Internal.h" />
     <ClInclude Include="Interpretors.h" />
     <ClInclude Include="Lexar.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="Method.h" />
     <ClInclude Include="MethodContext.h" />
     <ClInclude Include="Object.h" />
