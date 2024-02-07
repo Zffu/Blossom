@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="cli">
+      <UniqueIdentifier>{d4a147a1-eb1a-4bdc-ae59-9bde948f4a06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commons">
+      <UniqueIdentifier>{bfa59881-4e45-49aa-b005-a26302623f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{425470ae-9bce-420c-b9da-664376e31882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="toolchain">
+      <UniqueIdentifier>{b1b889e5-3381-4cab-b6b4-b91a116b0d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="toolchain\lexar">
+      <UniqueIdentifier>{caa92e0a-32a3-4870-a9a9-423b25a1e04d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="env">
+      <UniqueIdentifier>{87153ad4-429f-4fbc-9242-fc4c98473baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="env\objects">
+      <UniqueIdentifier>{854b4ab6-9a95-4de4-bd20-281c3378b07a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="env\interpretors">
+      <UniqueIdentifier>{4bcaa608-51d3-4991-a552-83252a9d91f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="env\ctx">
+      <UniqueIdentifier>{97262688-0821-4dce-b0b2-6eec2b961d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="env\internal">
+      <UniqueIdentifier>{54310bdd-91cb-4a6e-8454-2e657a00d543}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="toolchain\parser">
+      <UniqueIdentifier>{0f4f0a53-b5b4-4db0-989c-66491aa102c0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="argParser.h">
+      <Filter>cli</Filter>
+    </ClInclude>
+    <ClInclude Include="fileLess.h">
+      <Filter>cli</Filter>
+    </ClInclude>
+    <ClInclude Include="stringutils.h">
+      <Filter>commons</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Lexar.h">
+      <Filter>toolchain\lexar</Filter>
+    </ClInclude>
+    <ClInclude Include="Token.h">
+      <Filter>toolchain\lexar</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>env\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Interpretors.h">
+      <Filter>env\interpretors</Filter>
+    </ClInclude>
+    <ClInclude Include="MethodContext.h">
+      <Filter>env\ctx</Filter>
+    </ClInclude>
+    <ClInclude Include="RunningEnvironment.h">
+      <Filter>env</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal.h">
+      <Filter>env\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>toolchain\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Method.h">
+      <Filter>env\objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="index.cpp">
+      <Filter>cli</Filter>
+    </ClCompile>
+    <ClCompile Include="Internal.cpp">
+      <Filter>env\internal</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
