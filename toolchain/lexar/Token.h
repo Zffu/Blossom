@@ -48,6 +48,12 @@ TokenGroupType getGroupTypeFromString(char c) {
 	if (c == '(' || c == ')') return PARENTHESIS;
 }
 
+TokenGroupType getGroupTypeByType(Token::Type type) {
+	if(type == Token::BRACKET_OPEN || type == Token::BRACKET_CLOSE) return BRACKETS;
+	if(type == Token::PARENTHESIS_OPEN || type == Token::PARENTHESIS_CLOSE) return PARENTHESIS;
+	if(type == Token::LIST_OPEN || type == Token::LIST_CLOSE) return LIST;
+}
+
 bool isGroupOpening(char c) {
 	return (c == '{' || c == '[' || c == '(');
 }
@@ -56,9 +62,18 @@ bool isGroupClosing(char c) {
 	return (c == '}' || c == ']' || c == ')');
 }
 
+bool isTypeGroupOpening(Token::Type type) {
+	return (type == BRACKET_OPEN || type == LIST_OPEN || type == PARENTHESIS_OPEN);
+}
+
+bool isTypeGroupClosing(Token::Type type) {
+	return (type == BRACKET_CLOSE || type == LIST_CLOSE || type == PARENTHESIS_CLOSE);
+}
+
 class Token {
 public:
 	std::vector<Token> subTokens;
+	TokenGroupType groupType;
 	bool isGroupToken = false;
 
 	enum Type {
@@ -97,9 +112,10 @@ public:
 		raw = r;
 	}
 
-	Token(std::vector<Token> sub) {
+	Token(std::vector<Token> sub, TokenGroupType type) {
 		isGroupToken = true;
 		subTokens = sub;
+		groupType = type;
 	}
 
 	Token() {

@@ -18,39 +18,36 @@ public:
 		bool hasParenthesisOpened = false;
 		std::vector<Token> stack;
 
-		for (Token token : t) {
-
-			if (token.type == Token::PARENTHESIS_CLOSE) {
-				if (!hasParenthesisOpened) {
-					Logger::global().error("Parser", "Parenthesis was closed before being opened");
-					return Token();
-				}
-				else {
-					hasParenthesisOpened = false;
-					if (stack.size() == 0) {
-						Logger::global().debug("Parser", "Sub Token Stack Was closed but was empty!");
-					}
-					Token group = Token(stack);
-					sub.push_back(group);
-					stack.clear();
-				}
-			}
-			
-			else if (token.type == Token::PARENTHESIS_OPEN) {
-				hasParenthesisOpened = true;
-			}
-
-			else if (hasParenthesisOpened) {
-				stack.push_back(token);
-			}
-		}
-
-		return Token(sub);
+		Token main = getSubTokens(-1, TokenGroupType::MAIN);
+		return main;
 	}
 
 private:
 std::vector<Token> tokens;
 int index;
+
+Token getSubTokens(int startIndex, TokenGroupType groupType) {
+	std::vector<Token> stack;
+
+	for(int i = startIndex + 1, i < tokens.size(), i++) {
+		Token token = tokens[i];
+
+		if(isTypeGroupClosing(token.type)) {
+			if(getGroupTypeByType(token.type) == groupType) {
+				break;
+			}
+		}
+		else if(isTypeGroupOpening(token.type)) {
+			Token group = getSubTokens(i, getGroupTypeByType(token.type));
+			stack.push_back(group);
+		}
+		else {
+			stack.push_back(token);
+		}
+	}
+
+	return Token(stack, groupType);
+} 
 
 bool hasNext() {
 	return ((index + 1) < tokens.size());
