@@ -23,12 +23,14 @@ public:
 private:
 Token getSubTokens(int startIndex, TokenGroupType groupType, std::vector<Token> tokens) {
 	std::vector<Token> stack;
+	bool ended = false;
 
 	for(int i = startIndex + 1, i < tokens.size(), i++) {
 		Token token = tokens[i];
 
 		if(isTypeGroupClosing(token.type)) {
 			if(getGroupTypeByType(token.type) == groupType) {
+				ended = true;
 				break;
 			}
 		}
@@ -41,7 +43,12 @@ Token getSubTokens(int startIndex, TokenGroupType groupType, std::vector<Token> 
 		}
 	}
 
-	return Token(stack, groupType, tokens);
+	if(ended) {
+		return Token(stack, groupType, tokens);
+	}
+	else {
+		Logger::global().error("Parser", "The Token Group was not closed before eof!")
+	}
 } 
 
 bool hasNext() {
