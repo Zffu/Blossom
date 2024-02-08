@@ -48,11 +48,11 @@ TokenGroupType getGroupTypeFromString(char c) {
 	if (c == '(' || c == ')') return PARENTHESIS;
 }
 
-bool isAGroupOpening(char c) {
+bool isGroupOpening(char c) {
 	return (c == '{' || c == '[' || c == '(');
 }
 
-bool isAGroupClosing(char c) {
+bool isGroupClosing(char c) {
 	return (c == '}' || c == ']' || c == ')');
 }
 
