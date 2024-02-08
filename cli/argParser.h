@@ -1,6 +1,8 @@
 #ifndef BLOSSOM_CORE_CLI_ARGPARSE
 #define BLOSSOM_CORE_CLI_ARGPARSE
 
+#include "../commons/Logger.h"
+
 #include <string>
 #include <vector>
 #include "../commons/stringutils.h"
@@ -42,11 +44,12 @@ public:
 
 		if (hasFileLessOptions) {
 			if (fileLess != hasFileLessOptions) {
-				addError("Tried adding a incompatible argument in the context! (Context Fileless Status: " + boolToString(hasFileLessOptions) + " Argument Fileless Status: " + boolToString(fileLess) + ")");
+				Logger::global().error("CLI Argument Parser", "Tried adding a incompatible argument in the context!(Context Fileless Status : " + boolToString(hasFileLessOptions) + " Argument Fileless Status : " + boolToString(fileLess) + ")");
 				return;
 			}
 			else {
-				addError("Tried adding another file-less argument but there was already one!");
+				Logger::global().error("CLI Argument Parser", "Tried adding another file-less argument but there was already one!");
+				return;
 			}
 		}
 
@@ -79,11 +82,11 @@ public:
 		for (int i = 1; i < argc; i++) {
 			if (argv[i][0] != '-') {
 				if (hasFileArgument) {
-					context.addError("Found multiple File Arguments!");
+					Logger::global().error("CLI Argument Parser", "Dissallowed use of the file argument: Found multiple file arguments.");
 					return context;
 				}
 				if (context.getArguments().size() > 0) {
-					context.addError("File must be the first argument when defining properties with it.");
+					Logger::global().error("CLI Argument Parser", "Illegal use of CLI Arguments: File must be the first argument when defining properties with it.");
 					return context;
 				}
 				hasFileArgument = true;
@@ -109,7 +112,7 @@ public:
 					type = ArgumentType::OPTION_HELP;
 					break;
 				default:
-					context.addError("Unknown Uption: " + full);
+					Logger::global().error("CLI Argument Parser", "Unknown Option: " + full);
 					return context;
 				}
 
