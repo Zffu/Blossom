@@ -11,22 +11,17 @@ class Parser {
 
 public:
 	Token parseTokens(std::vector<Token> t) {
-		tokens = t;
-		index = 0;
 		std::vector<Token> sub;
 
 		bool hasParenthesisOpened = false;
 		std::vector<Token> stack;
 
-		Token main = getSubTokens(-1, TokenGroupType::MAIN);
+		Token main = getSubTokens(-1, TokenGroupType::MAIN, t);
 		return main;
 	}
 
 private:
-std::vector<Token> tokens;
-int index;
-
-Token getSubTokens(int startIndex, TokenGroupType groupType) {
+Token getSubTokens(int startIndex, TokenGroupType groupType, std::vector<Token> tokens) {
 	std::vector<Token> stack;
 
 	for(int i = startIndex + 1, i < tokens.size(), i++) {
@@ -38,7 +33,7 @@ Token getSubTokens(int startIndex, TokenGroupType groupType) {
 			}
 		}
 		else if(isTypeGroupOpening(token.type)) {
-			Token group = getSubTokens(i, getGroupTypeByType(token.type));
+			Token group = getSubTokens(i, getGroupTypeByType(token.type), tokens);
 			stack.push_back(group);
 		}
 		else {
@@ -46,7 +41,7 @@ Token getSubTokens(int startIndex, TokenGroupType groupType) {
 		}
 	}
 
-	return Token(stack, groupType);
+	return Token(stack, groupType, tokens);
 } 
 
 bool hasNext() {
