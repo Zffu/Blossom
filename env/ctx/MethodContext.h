@@ -2,7 +2,7 @@
 #define BLOSSOM_ENV_METHOD_CONTEXT
 
 #include <string>
-#include "Object.h"
+#include "../objects/Object.h"
 #include<vector>
 
 class MethodContext {

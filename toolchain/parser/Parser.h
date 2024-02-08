@@ -1,9 +1,11 @@
 #ifndef BLOSSOM_TOOLCHAIN_PARSER
 #define BLOSSOM_TOOLCHAIN_PARSER
 
+#include "../../commons/Logger.h"
+
 #include <vector>
 #include <iostream>
-#include "toolchain/lexar/Token.h"
+#include "../lexar/Token.h"
 
 class Parser {
 
@@ -20,13 +22,13 @@ public:
 
 			if (token.type == Token::PARENTHESIS_CLOSE) {
 				if (!hasParenthesisOpened) {
-					std::cout << "Parser Error: Parenthesis was closed before being opened!" << std::endl;
+					Logger::global().error("Parser", "Parenthesis was closed before being opened");
 					return Token();
 				}
 				else {
 					hasParenthesisOpened = false;
 					if (pool.size() == 0) {
-						std::cout << "Parser Debug: Sub Token Pool Was closed but was empty!" << std::endl;
+						Logger::global().debug("Parser", "Sub Token Pool Was closed but was empty!");
 					}
 					Token group = Token(pool);
 					sub.push_back(group);

@@ -9,12 +9,14 @@ Options:
 --info or --i: Shows your Blossom's distribution information.
 */
 
+#include "../commons/Logger.h"
+
 #include <iostream>
 #include <algorithm>
-#include "argParser.h"
-#include "Parser.h"
-#include "fileLess.h"
-#include "Lexar.h"
+#include "./argParser.h"
+#include "../toolchain/parser/Parser.h"
+#include "./fileLess.h"
+#include "../toolchain/lexar/Lexar.h"
 #include <string>
 #include <deque>
 
@@ -22,7 +24,7 @@ using namespace std;
 
 void handleFileLessTokens(ArgumentContext ctx) {
 	if (!ctx.isFileLess()) {
-		cout << "CLI Runtime Error! handleFileLessTokens was called with a non file-less token context!" << endl;
+		Logger::global().error("CLI Command", "handleFileLessTokens was called with a non file-less token context!");
 		return;
 	}
 
@@ -51,7 +53,7 @@ void showGroupTokens(int index, Token group) {
 int main(int argc, char* argv[])
 {
 	if (argc <= 1) {
-		cout << "Invalid Usage of the CLI Command!" << endl;
+		Logger::global().error("CLI Command", "Invalid usage!");
 		showHelpMessage();
 		return 0;
 	}
@@ -59,14 +61,14 @@ int main(int argc, char* argv[])
 	ArgumentContext ctx = ArgParser::parseArgs(argc, argv);
 
 	if (ctx.getErrors().size() > 0) {
-		cout << "Could not parse the command!" << endl;
+		Logger::global().error("CLI Argument Parser", "Could not parse the arguments!");
 		for (string error : ctx.getErrors()) {
 			cout << "Argument Parser Error: " << error << endl;
 		}
 	}
 
 	if (ctx.getFileName() == "" && !ctx.isFileLess()) {
-		cout << "Argument Parser Error: Could not parse file name!" << endl;
+		Logger::global().error("CLI Argument Parser", "Could not parse the file name!");
 		return 0;
 	}
 
@@ -89,7 +91,7 @@ int main(int argc, char* argv[])
 		showGroupTokens(spaceIndex, group);
 	}
 	else {
-		cout << "Tokenizing when wrong!";
+		Logger::global().error("Tokenizer", "Tokenizing went wrong!");
 	}
 
 	return 0;

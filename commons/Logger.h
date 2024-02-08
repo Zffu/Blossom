@@ -35,20 +35,20 @@ public:
 
 	void debug(std::string service, std::string msg) {
 		if (enableDebug) {
-			std::cout << generateLogMessage(service, msg, DEBUG);;
+			std::cout << generateLogMessage(service, msg, DEBUG) << std::endl;
 		}
 	}
 
 	void info(std::string service, std::string msg) {
-		std::cout << generateLogMessage(service, msg, INFO);;
+		std::cout << generateLogMessage(service, msg, INFO) << std::endl;
 	}
 
 	void warn(std::string service, std::string msg) {
-		std::cout << generateLogMessage(service, msg, WARN);;
+		std::cout << generateLogMessage(service, msg, WARN) << std::endl;
 	}
 
 	void error(std::string service, std::string msg) {
-		std::cout << generateLogMessage(service, msg, ERROR);;
+		std::cout << generateLogMessage(service, msg, ERROR) << std::endl;
 	}
 
 

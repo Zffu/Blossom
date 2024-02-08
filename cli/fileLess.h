@@ -2,7 +2,7 @@
 #define BLOSSOM_CORE_CLI_FILELESS_HANDLER
 
 #include <iostream>
-#include "core/Blossom.h"
+#include "../core/Blossom.h"
 
 using namespace std;
 

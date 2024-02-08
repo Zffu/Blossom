@@ -36,54 +36,54 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="argParser.h">
+    <ClInclude Include="cli/argParser.h">
       <Filter>cli</Filter>
     </ClInclude>
-    <ClInclude Include="fileLess.h">
+    <ClInclude Include="cli/fileLess.h">
       <Filter>cli</Filter>
     </ClInclude>
-    <ClInclude Include="stringutils.h">
+    <ClInclude Include="commons/stringutils.h">
       <Filter>commons</Filter>
     </ClInclude>
-    <ClInclude Include="Blossom.h">
+    <ClInclude Include="core/Blossom.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="Lexar.h">
+    <ClInclude Include="toolchain/lexar/Lexar.h">
       <Filter>toolchain\lexar</Filter>
     </ClInclude>
-    <ClInclude Include="Token.h">
+    <ClInclude Include="toolchain/lexar/Token.h">
       <Filter>toolchain\lexar</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
+    <ClInclude Include="env/objects/Object.h">
       <Filter>env\objects</Filter>
     </ClInclude>
-    <ClInclude Include="Interpretors.h">
+    <ClInclude Include="env/interpretors/Interpretors.h">
       <Filter>env\interpretors</Filter>
     </ClInclude>
-    <ClInclude Include="MethodContext.h">
+    <ClInclude Include="env/ctx/MethodContext.h">
       <Filter>env\ctx</Filter>
     </ClInclude>
-    <ClInclude Include="RunningEnvironment.h">
+    <ClInclude Include="env/RunningEnvironment.h">
       <Filter>env</Filter>
     </ClInclude>
-    <ClInclude Include="Internal.h">
+    <ClInclude Include="env/internal/Internal.h">
       <Filter>env\internal</Filter>
     </ClInclude>
-    <ClInclude Include="Parser.h">
+    <ClInclude Include="toolchain/parser/Parser.h">
       <Filter>toolchain\parser</Filter>
     </ClInclude>
-    <ClInclude Include="Method.h">
+    <ClInclude Include="env/objects/Method.h">
       <Filter>env\objects</Filter>
     </ClInclude>
-    <ClInclude Include="Logger.h">
+    <ClInclude Include="commons/Logger.h">
       <Filter>commons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="index.cpp">
+    <ClCompile Include="cli/index.cpp">
       <Filter>cli</Filter>
     </ClCompile>
-    <ClCompile Include="Internal.cpp">
+    <ClCompile Include="env/internal/Internal.cpp">
       <Filter>env\internal</Filter>
     </ClCompile>
   </ItemGroup>

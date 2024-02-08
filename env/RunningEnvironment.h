@@ -1,9 +1,9 @@
 #ifndef BLOSSOM_ENV_RUNNING
 #define BLOSSOM_ENV_RUNNING
 
-#include "Object.h"
-#include "Method.h"
-#include "Internal.h"
+#include "./objects/Object.h"
+#include "./objects/Method.h"
+#include "./internal/Internal.h"
 #include <unordered_map>
 #include <string>
 #include <vector>

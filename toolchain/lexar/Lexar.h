@@ -1,11 +1,13 @@
 #ifndef BLOSSOM_TOOLCHAIN_LEXAR
 #define BLOSSOM_TOOLCHAIN_LEXAR
 
-#include <deque>
+#include "../../commons/Logger.h"
+
+#include <vector>
 #include <string>
 #include <iostream>
-#include "toolchain/lexar/Token.h"
-#include "commons/stringutils.h"
+#include "./Token.h"
+#include "../../commons/stringutils.h"
 #include <fstream>
 
 /*
@@ -57,7 +59,8 @@ public:
 			}
 		}
 		catch (int e) {
-			cout << "An Error occured while tokenising the Blossom File " << fileName << " (errCode: " << e << ")" << endl;
+			Logger::global().error("Tokenization", "An Error occured while tokenising the Blossom File" + fileName);
+
 		}
 		verifyTokens();
 
@@ -67,7 +70,7 @@ public:
 	void verifyTokens() {
 
 		if (inString) {
-			cout << "Error: Unfinished string litterral opening!" << endl;
+			Logger::global().error("Lexer", "Unfinished string litterral opening!");
 			inString = false;
 		}
 
@@ -76,6 +79,7 @@ public:
 			tokens.push_back(invalidStringLitterralToken);
 			invalidStr = "";
 		}
+
 	}
 
 private:
