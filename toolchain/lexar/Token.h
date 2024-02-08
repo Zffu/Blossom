@@ -7,6 +7,54 @@ Only contains things that are definitive symbols.
 */
 
 #include<vector>
+#include<string>
+
+enum TokenGroupType {
+	MAIN = 0,
+	BRACKETS = 1,
+	PARENTHESIS = 2,
+	LIST = 3
+};
+
+std::string getOpeningChar(TokenGroupType type) {
+	switch (type) {
+	case BRACKETS:
+		return "{";
+	case PARENTHESIS:
+		return "(";
+	case LIST:
+		return "[";
+	default:
+		return "";
+	}
+}
+
+std::string getClosingChar(TokenGroupType type) {
+	switch (type) {
+	case BRACKETS:
+		return "}";
+	case PARENTHESIS:
+		return ")";
+	case LIST:
+		return "]";
+	default:
+		return "";
+	}
+}
+
+TokenGroupType getGroupTypeFromString(char c) {
+	if (c == '{' || c == '}') return BRACKETS;
+	if (c == '[' || c == ']') return LIST;
+	if (c == '(' || c == ')') return PARENTHESIS;
+}
+
+bool isAGroupOpening(char c) {
+	return (c == '{' || c == '[' || c == '(');
+}
+
+bool isAGroupClosing(char c) {
+	return (c == '}' || c == ']' || c == ')');
+}
 
 class Token {
 public:
