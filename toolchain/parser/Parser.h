@@ -16,7 +16,7 @@ public:
 		std::vector<Token> sub;
 
 		bool hasParenthesisOpened = false;
-		std::vector<Token> pool;
+		std::vector<Token> stack;
 
 		for (Token token : t) {
 
@@ -27,12 +27,12 @@ public:
 				}
 				else {
 					hasParenthesisOpened = false;
-					if (pool.size() == 0) {
-						Logger::global().debug("Parser", "Sub Token Pool Was closed but was empty!");
+					if (stack.size() == 0) {
+						Logger::global().debug("Parser", "Sub Token Stack Was closed but was empty!");
 					}
-					Token group = Token(pool);
+					Token group = Token(stack);
 					sub.push_back(group);
-					pool.clear();
+					stack.clear();
 				}
 			}
 			
@@ -41,7 +41,7 @@ public:
 			}
 
 			else if (hasParenthesisOpened) {
-				pool.push_back(token);
+				stack.push_back(token);
 			}
 		}
 
