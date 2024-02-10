@@ -136,6 +136,7 @@
     <ClInclude Include="cli/fileLess.h" />
     <ClInclude Include="cli/Internal.h" />
     <ClInclude Include="env/interpretors/Interpretors.h" />
+    <ClInclude Include="GroupToken.h" />
     <ClInclude Include="toolchain/lexar/Lexar.h" />
     <ClInclude Include="commons/Logger.h" />
     <ClInclude Include="env/objects/Method.h" />
