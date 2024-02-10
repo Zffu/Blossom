@@ -17,7 +17,9 @@ The Lexar of Blossom.
 
 class Lexar {
 public:
-	Lexar() {}
+	Lexar() {
+
+	}
 	std::vector<Token> tokens;
 
 	bool tokenize(const std::string s) {

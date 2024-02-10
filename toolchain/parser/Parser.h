@@ -16,8 +16,8 @@ public:
 		bool hasParenthesisOpened = false;
 		std::vector<Token> stack;
 
-		Token main = getSubTokens(-1, TokenGroupType::MAIN, t);
-		return main;
+		//Token main = getSubTokens(-1, TokenGroupType::MAIN, t);
+		return Token(Token::ENDOFFILE, "");
 	}
 
 private:
@@ -25,7 +25,7 @@ Token getSubTokens(int startIndex, TokenGroupType groupType, std::vector<Token> 
 	std::vector<Token> stack;
 	bool ended = false;
 
-	for(int i = startIndex + 1, i < tokens.size(), i++) {
+	for (int i = startIndex + 1; i < tokens.size(); i++) {
 		Token token = tokens[i];
 
 		if(isTypeGroupClosing(token.type)) {
@@ -44,25 +44,14 @@ Token getSubTokens(int startIndex, TokenGroupType groupType, std::vector<Token> 
 	}
 
 	if(ended) {
-		return Token(stack, groupType, tokens);
+		return Token(stack, groupType);
 	}
 	else {
-		Logger::global().error("Parser", "The Token Group was not closed before eof!")
+		Logger::global().error("Parser", "The Token Group was not closed before eof!");
 	}
 } 
 
-bool hasNext() {
-	return ((index + 1) < tokens.size());
-}
 
-Token peek() {
-	return tokens[index + 1];
-}
-
-Token next() {
-	index++;
-	return tokens[index];
-}
 
 };
 
