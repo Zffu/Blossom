@@ -25,7 +25,7 @@ Token getSubTokens(int startIndex, TokenGroupType groupType, std::vector<Token> 
 	std::vector<Token> stack;
 	bool ended = false;
 
-	for (int i = startIndex + 1; i < tokens.size(); i++) {
+	for (int i = startIndex + 1; i < tokens.size(); ++i) {
 		Token token = tokens[i];
 
 		if(isTypeGroupClosing(token.type)) {

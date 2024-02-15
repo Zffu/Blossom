@@ -168,7 +168,7 @@ private:
 			}
 		}
 
-		stringItr++;
+		++tringItr;
 	}
 
 
