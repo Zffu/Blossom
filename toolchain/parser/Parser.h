@@ -11,60 +11,45 @@ class Parser {
 
 public:
 	Token parseTokens(std::vector<Token> t) {
-		tokens = t;
-		index = 0;
 		std::vector<Token> sub;
 
 		bool hasParenthesisOpened = false;
-		std::vector<Token> pool;
+		std::vector<Token> stack;
 
-		for (Token token : t) {
-
-			if (token.type == Token::PARENTHESIS_CLOSE) {
-				if (!hasParenthesisOpened) {
-					Logger::global().error("Parser", "Parenthesis was closed before being opened");
-					return Token();
-				}
-				else {
-					hasParenthesisOpened = false;
-					if (pool.size() == 0) {
-						Logger::global().debug("Parser", "Sub Token Pool Was closed but was empty!");
-					}
-					Token group = Token(pool);
-					sub.push_back(group);
-					pool.clear();
-				}
-			}
-			
-			else if (token.type == Token::PARENTHESIS_OPEN) {
-				hasParenthesisOpened = true;
-			}
-
-			else if (hasParenthesisOpened) {
-				pool.push_back(token);
-			}
-		}
-
-		return Token(sub);
+		//Token main = getSubTokens(-1, TokenGroupType::MAIN, t);
+		return getSubTokens(-1, GroupType::MAIN, t);
 	}
 
 private:
-std::vector<Token> tokens;
-int index;
+Token getSubTokens(int startIndex, GroupType groupType, std::vector<Token> tokens) {
+	std::vector<Token> stack;
+	bool ended = false;
 
-bool hasNext() {
-	return ((index + 1) < tokens.size());
-}
+	for (int i = startIndex + 1; i < tokens.size(); ++i) {
+		Token token = tokens[i];
 
-Token peek() {
-	return tokens[index + 1];
-}
+		if(isTypeClosing(token.type)) {
+			if(getGroupType(token.type) == groupType) {
+				ended = true;
+				break;
+			}
+		}
+		else if(isTypeOpening(token.type)) {
+			Token group = getSubTokens(i, getGroupType(token.type), tokens);
+			stack.push_back(group);
+		}
+		else {
+			stack.push_back(token);
+		}
+	}
 
-Token next() {
-	index++;
-	return tokens[index];
-}
-
+	if(ended || groupType == MAIN) {
+		return Token(groupType, stack);
+	}
+	else {
+		Logger::global().error("Parser", "The Token Group was not closed before eof!");
+	}
+} 
 };
 
 #endif

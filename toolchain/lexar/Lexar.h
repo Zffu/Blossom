@@ -17,15 +17,13 @@ The Lexar of Blossom.
 
 class Lexar {
 public:
-	Lexar() {}
+	Lexar(std::string s) {
+		str += s;
+		stringEnd = s.size();
+	}
 	std::vector<Token> tokens;
 
-	bool tokenize(const std::string s) {
-		str = s;
-		baseItr = 0;
-		stringItr = 0;
-		stringEnd = s.size();
-
+	bool tokenize() {
 		while (!isEnd()) {
 			scanToken(current());
 
@@ -35,35 +33,6 @@ public:
 		}
 		
 		verifyTokens();
-
-		
-
-		return true;
-	}
-
-	bool tokenizeFile(std::string fileName) {
-		str = "";
-		baseItr = 0;
-		stringItr = 0;
-		stringEnd = 0;
-
-		ifstream in;
-		
-		try {
-			in.open(fileName);
-
-			char c;
-
-			while (in.get(c)) {
-				scanToken(c);
-			}
-		}
-		catch (int e) {
-			Logger::global().error("Tokenization", "An Error occured while tokenising the Blossom File" + fileName);
-
-		}
-		verifyTokens();
-
 		return true;
 	}
 
@@ -75,7 +44,7 @@ public:
 		}
 
 		if (invalidStr != "") {
-			Token invalidStringLitterralToken = Token(Token::Type::STRING_UNKNOWN, invalidStr);
+			Token invalidStringLitterralToken = Token(TokenType::STRING_UNKNOWN , invalidStr);
 			tokens.push_back(invalidStringLitterralToken);
 			invalidStr = "";
 		}
@@ -83,20 +52,17 @@ public:
 	}
 
 private:
-	std::string str;
-	std::vector<Token>::iterator tokens_itr;
-	Token eofToken;
-	int baseItr;
-	int stringItr;
-	int stringEnd;
+	std::string str = "";
+	int stringItr = 0;
+	int stringEnd = 0;
 	bool inString = false;
-	string invalidStr;
+	std::string invalidStr = "";
 
-	bool isEnd() {
+	inline bool isEnd() {
 		return (stringItr >= stringEnd);
 	}
 
-	char current() {
+	inline char current() {
 		return str[stringItr];
 	}
 
@@ -104,51 +70,51 @@ private:
 		bool matched = true;
 
 
-		Token token;
+		Token token = Token(TokenType::NONE, "");
 
 		switch (c) {
 
 		case '{':
-			token.setType(Token::Type::BRACKET_OPEN);
+			token.setType(TokenType::BRACKET_OPEN);
 			break;
 		case '}':
-			token.setType(Token::Type::BRACKET_CLOSE);
+			token.setType(TokenType::BRACKET_CLOSE);
 			break;
 		case '(':
-			token.setType(Token::Type::PARENTHESIS_OPEN);
+			token.setType(TokenType::PARENTHESIS_OPEN);
 			break;
 		case ')':
-			token.setType(Token::Type::PARENTHESIS_CLOSE);
+			token.setType(TokenType::PARENTHESIS_CLOSE);
 			break;
 		case '[':
-			token.setType(Token::Type::LIST_OPEN);
+			token.setType(TokenType::LIST_OPEN);
 			break;
 		case ']':
-			token.setType(Token::Type::LIST_CLOSE);
+			token.setType(TokenType::LIST_CLOSE);
 			break;
 		case ';':
-			token.setType(Token::Type::SEMICOLON);
+			token.setType(TokenType::SEMICOLON);
 			break;
 		case '.':
-			token.setType(Token::Type::DOT);
+			token.setType(TokenType::DOT);
 			break;
 		case '\'':
 		case '"':
 			if (inString) {
 				token.setRaw(invalidStr);
-				token.setType(Token::Type::STRING_LITTERAL);
+				token.setType(TokenType::STRING_LITTERAL);
 				inString = false;
 				invalidStr = "";
 			}
 			else {
 				inString = true;
-				token.setType(Token::Type::STRING_OPENER);
+				token.setType(TokenType::STRING_OPENER);
 			}
 			break;
 		}
 
 		// That means that is a unkown string litteral.
-		if (token.type == Token::Type::NONE && !isWhitespace(c)) {
+		if (token.type == TokenType::NONE && !isWhitespace(c)) {
 			invalidStr += c;
 
 			matched = false;
@@ -156,17 +122,17 @@ private:
 
 		if (matched) {
 			if (invalidStr != "") {
-				Token invalidStringLitterralToken = Token(Token::Type::STRING_UNKNOWN, invalidStr);
+				Token invalidStringLitterralToken = Token(TokenType::STRING_UNKNOWN, invalidStr);
 				tokens.push_back(invalidStringLitterralToken);
 				invalidStr = "";
 			}
 
-			if (token.type != Token::Type::NONE) {
+			if (token.type != TokenType::NONE) {
 				tokens.push_back(token);
 			}
 		}
 
-		stringItr++;
+		++stringItr;
 	}
 
 

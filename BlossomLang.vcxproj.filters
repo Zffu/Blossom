@@ -42,9 +42,6 @@
     <ClInclude Include="cli/fileLess.h">
       <Filter>cli</Filter>
     </ClInclude>
-    <ClInclude Include="commons/stringutils.h">
-      <Filter>commons</Filter>
-    </ClInclude>
     <ClInclude Include="core/Blossom.h">
       <Filter>core</Filter>
     </ClInclude>
@@ -66,9 +63,6 @@
     <ClInclude Include="env/RunningEnvironment.h">
       <Filter>env</Filter>
     </ClInclude>
-    <ClInclude Include="env/internal/Internal.h">
-      <Filter>env\internal</Filter>
-    </ClInclude>
     <ClInclude Include="toolchain/parser/Parser.h">
       <Filter>toolchain\parser</Filter>
     </ClInclude>
@@ -76,6 +70,10 @@
       <Filter>env\objects</Filter>
     </ClInclude>
     <ClInclude Include="commons/Logger.h">
+      <Filter>commons</Filter>
+    </ClInclude>
+    <ClInclude Include="cli/Internal.h" />
+    <ClInclude Include="file.h">
       <Filter>commons</Filter>
     </ClInclude>
   </ItemGroup>
