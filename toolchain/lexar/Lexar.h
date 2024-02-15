@@ -17,17 +17,13 @@ The Lexar of Blossom.
 
 class Lexar {
 public:
-	Lexar() {
-
+	Lexar(std::string s) {
+		str += s;
+		stringEnd = s.size();
 	}
 	std::vector<Token> tokens;
 
-	bool tokenize(const std::string s) {
-		str = s;
-		baseItr = 0;
-		stringItr = 0;
-		stringEnd = s.size();
-
+	bool tokenize() {
 		while (!isEnd()) {
 			scanToken(current());
 
@@ -37,9 +33,6 @@ public:
 		}
 		
 		verifyTokens();
-
-		
-
 		return true;
 	}
 
@@ -85,20 +78,17 @@ public:
 	}
 
 private:
-	std::string str;
-	std::vector<Token>::iterator tokens_itr;
-	Token eofToken;
-	int baseItr;
-	int stringItr;
-	int stringEnd;
+	std::string str = "";
+	int stringItr = 0;
+	int stringEnd = 0;
 	bool inString = false;
-	string invalidStr;
+	std::string invalidStr = "";
 
-	bool isEnd() {
+	inline bool isEnd() {
 		return (stringItr >= stringEnd);
 	}
 
-	char current() {
+	inline char current() {
 		return str[stringItr];
 	}
 
@@ -106,7 +96,7 @@ private:
 		bool matched = true;
 
 
-		Token token;
+		Token token = Token(Token::NONE, "");
 
 		switch (c) {
 
