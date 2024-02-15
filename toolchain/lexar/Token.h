@@ -9,6 +9,13 @@ Only contains things that are definitive symbols.
 #include<vector>
 #include<string>
 
+enum GroupType {
+	PARENTHESIS,
+	BRACKETS,
+	LIST,
+	MAIN
+};
+
 enum TokenType {
 
 	// Dynamically assigned types / Internal Types
@@ -38,11 +45,18 @@ class Token {
 public:
 
 	TokenType type;
+	GroupType group;
+	std::vector<Token> sub;
 	string raw;
 
 	Token(TokenType t, string r) {
 		type = t;
 		raw = r;
+	}
+
+	Token(GroupType type, std::vector<Token> s) {
+		group = type;
+		sub = s;
 	}
 
 	void setType(TokenType t) {
@@ -54,5 +68,20 @@ public:
 	}
 
 };
+
+inline bool isTypeClosing(TokenType t) {
+	return (t == PARENTHESIS_CLOSE || t == LIST_CLOSE || t == BRACKET_CLOSE);
+}
+
+inline bool isTypeOpening(TokenType t) {
+	return (t == PARENTHESIS_OPEN || t == LIST_OPEN || t == BRACKET_OPEN);
+}
+
+GroupType getGroupType(TokenType t) {
+	if (t == PARENTHESIS_OPEN || t == PARENTHESIS_CLOSE) return PARENTHESIS;
+	if (t == LIST_OPEN || t == LIST_CLOSE) return LIST;
+	if (t == BRACKET_OPEN || t == BRACKET_CLOSE) return BRACKETS;
+}
+
 
 #endif BLOSSOM_TOOLCHAIN_LEXAR_TOKEN

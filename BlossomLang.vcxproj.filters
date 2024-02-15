@@ -73,9 +73,8 @@
       <Filter>commons</Filter>
     </ClInclude>
     <ClInclude Include="cli/Internal.h" />
-    <ClInclude Include="comoomns/stringutils.h" />
-    <ClInclude Include="GroupToken.h">
-      <Filter>toolchain\lexar</Filter>
+    <ClInclude Include="file.h">
+      <Filter>commons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

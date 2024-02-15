@@ -19,6 +19,7 @@ Options:
 #include "../toolchain/lexar/Lexar.h"
 #include <string>
 #include <deque>
+#include "../commons/file.h"
 
 using namespace std;
 
@@ -40,8 +41,8 @@ void handleFileLessTokens(ArgumentContext ctx) {
 }
 
 void showGroupTokens(int index, Token group) {
-	for (Token t : group.subTokens) {
-		if (t.isGroupToken) {
+	for (Token t : group.sub) {
+		if (t.sub.size() != 0) {
 			showGroupTokens(index++, t);
 		}
 		else {
@@ -77,9 +78,9 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 	
-	Lexar lexar = Lexar();
+	Lexar lexar = Lexar(getContent(ctx.getFileName()));
 	
-	if (lexar.tokenizeFile(ctx.getFileName())) {
+	if (lexar.tokenize()) {
 		std::vector<Token> tokens = lexar.tokens;
 		Parser parser = Parser();
 		Token group = parser.parseTokens(tokens);
