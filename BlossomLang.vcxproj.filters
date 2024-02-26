@@ -51,23 +51,8 @@
     <ClInclude Include="toolchain/lexar/Token.h">
       <Filter>toolchain\lexar</Filter>
     </ClInclude>
-    <ClInclude Include="env/objects/Object.h">
-      <Filter>env\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="env/interpretors/Interpretors.h">
-      <Filter>env\interpretors</Filter>
-    </ClInclude>
-    <ClInclude Include="env/ctx/MethodContext.h">
-      <Filter>env\ctx</Filter>
-    </ClInclude>
-    <ClInclude Include="env/RunningEnvironment.h">
-      <Filter>env</Filter>
-    </ClInclude>
     <ClInclude Include="toolchain/parser/Parser.h">
       <Filter>toolchain\parser</Filter>
-    </ClInclude>
-    <ClInclude Include="env/objects/Method.h">
-      <Filter>env\objects</Filter>
     </ClInclude>
     <ClInclude Include="commons/Logger.h">
       <Filter>commons</Filter>
@@ -80,9 +65,6 @@
   <ItemGroup>
     <ClCompile Include="cli/index.cpp">
       <Filter>cli</Filter>
-    </ClCompile>
-    <ClCompile Include="env/internal/Internal.cpp">
-      <Filter>env\internal</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -128,22 +128,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cli/index.cpp" />
-    <ClCompile Include="env/internal/Internal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cli/argParser.h" />
     <ClInclude Include="core/Blossom.h" />
     <ClInclude Include="cli/fileLess.h" />
     <ClInclude Include="cli/Internal.h" />
-    <ClInclude Include="env/interpretors/Interpretors.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="toolchain/lexar/Lexar.h" />
     <ClInclude Include="commons/Logger.h" />
-    <ClInclude Include="env/objects/Method.h" />
-    <ClInclude Include="env/ctx/MethodContext.h" />
-    <ClInclude Include="env/objects/Object.h" />
     <ClInclude Include="toolchain/parser/Parser.h" />
-    <ClInclude Include="env/RunningEnvironment.h" />
     <ClInclude Include="toolchain/lexar/Token.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
